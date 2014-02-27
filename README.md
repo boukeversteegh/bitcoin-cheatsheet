@@ -43,6 +43,8 @@ Features:
   - decentralized &mdash; not controlled by anyone
   - global &mdash; usable all over the world
   - deflationary &mdash; cannot be printed by anyone at will
+  - irreversible &mdash; no-one can reclaim coins they have sent you
+  - proof of ownership &mdash; you can prove to others that you own a certain amount of money
   - 100% sound money in accordance with Austrian Economics:
     - fungible &mdash; every coin is the same
     - portable &mdash; can easily be sent to anywhere on earth
@@ -115,10 +117,31 @@ Features:
 - transactions are created by bitcoin [clients](#clients)
 - [clients](#clients) relay transactions to eachother and to [miners](#miners)
 
-
 <a id="confirmations">Confirmations</a>
 ---
 Bitcoin-software often shows the **confirmation** status of a [transaction](#transactions). An unconfirmed transaction means that it wasn't yet recorded in the [blockchain](#blockchain). The first confirmation happens when a [miner](#miners) includes the transaction in a [block](#blocks) and publishes the block and the [proof of work](#proof-of-work) to the network. The second confirmation is when another block is added to the blockchain, etcetera.
+
+<a id="proofofwork">Proof of work</a>
+-------------
+In computer science and mathematics, a **proof of work** (POW) is a solution to a difficult problem that is easily and independently verifiable. Blocks require a *proof of work* to be accepted by the network. This limits the rate at which [blocks](#blocks) can be created. Through [difficulty](#difficulty), the average creation rate is maintained at 10 minutes, regardless of the available processing power in the network.
+
+A block must contain a [hash](#hash) of the data in the block and a random [nonce](#nonce)-value, and this hash must begin with many zeros. The hash cannot be controlled directly, but by trying out many different nonce-values, a nonce that generates a valid hash can be found. The *proof of work* is the nonce in combination with the rest of the block.
+
+Function:
+- Making sure [blocks](#blocks) are added to the chain at regular intervals
+- By extension, controlling Bitcoin inflation
+- Randomizing who will get new [bitcoins](#bitcoin)
+- Creating a delay between blocks, so they have time to spread through the network before the next one is found, and making sure everyone is up-to-date
+
+Features:
+- Hashing a block+nonce can be done very fast
+- Anyone can hash the block and its nonce, to verify that the hash is valid
+- The number of zero's to be found is controlled by the [difficulty](#difficulty)
+
+Mechanism:
+  - A block's [hash](#hash) depends on the [transactions](#transactions) and [nonce](#nonce)
+  - The [nonce](#nonce) can be chosen by the miner
+  - The block is re-hashed with random nonces, until it generates a hash with enough `0000`'s.
 
 <a id="address">Addresses</a>
 ---
@@ -174,19 +197,7 @@ In computer science, a **nonce** is a meaningless number. It is often added to d
 - [Blocks](#blocks)
 - Signatures(?)
 
-<a id="proofofwork">Proof of work</a>
--------------
-In computer science and mathematics, a **proof of work** (POW) is a solution to a difficult problem that is easily and independently verifiable. In Bitcoin, POW is used to make it difficult to create blocks, so that new bitcoins will be created at a steady rate.
 
-Function:
-- Stabilizing the creation rate of new [blocks](#blocks).
-- Randomizing who will get new [bitcoins](#bitcoin).
-- Delays finalizing the ledger so [miners](#miners) blocks have time to spread around the network.
-
-Operation:
-  - A block's [hash](#hash) depends on the [transactions](#transactions) and [nonce](#nonce)
-  - The [nonce](#nonce) can be chosen by the miner
-  - The block is re-hashed with random nonces, until it generates a hash with enough `0000`'s.
 
 <a id="difficulty">Difficulty</a>
 -----
