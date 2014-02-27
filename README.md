@@ -13,30 +13,49 @@ Author: *Bouke Versteegh*
 - [Transactions](#transactions)
   - [Inputs](#inputs)
   - [Outputs](#outputs)
-  - Scrypt
-  - Return addresses
+  - [Scrypt] (#scrypt)
+  - [Return addresses] (#return-address)
+  - [Satoshi](#satoshi)
+  - [Fees](#fee)
 - [Mining](#mining)
   - [Confirmations](#confirmations)
   - [Proof of Work](#proof-of-work)
-  - Block reward
+  - [Block reward] (#block-reward)
   - [Difficulty](#difficulty)
 - [Addresses](#addresses)
-  - [Base58Check](#base58check)
+  - [Base58Check] (#base58check)
   - [Vanity address](#vanity-address)
-  - [Multisignature addresses](#multisig-addresses)
+  - [Multisignature addresses] (#multisig-address)
+  - [Encrypted address (BIP0038)] (#bip0038)
+  - [Stealth address] (#stealth-address)
 
-**Using Bitcoin**:
+**Bitcoin in Practice**:
 - Exchanges
-- Wallets / Clients
-- Cold storage
-- [QR-code](#qr-code)
+- Wallets
+  - Clients
+  - Paper wallets
+  - Cold storage
+  - Hardware wallets
+- Mining Industry
+  - Mining pools
+  - Mining hardware
+  - ASICS
+  - FPGA
+  - GPU
+  - CPU
+- [QR-codes](#qr-code)
+
+
+**Security**:
+- Double spending
+- 51% attack
 
 **Computer Terms**:
 - [Nonce](#nonce)
 - [Hash](#hash)
 - [Public-Key Cryptography](#public-key-cryptography)
-- [Public Key](#public-key)
-- [Private Key](#private-key)
+  - [Public Key](#public-key)
+  - [Private Key](#private-key)
 
 
 <a id="bitcoin">Bitcoin</a>
@@ -120,11 +139,57 @@ Function:
 Features:
 - a transaction contains:
   - a [transaction-id](#txid)
-  - zero or more [outputs](#outputs) &mdash; *which [addresses](#addresses) to send bitcoins and the amount*
   - one or more [inputs](#inputs) &mdash; *which bitcoins to use*
-  
+  - zero or more [outputs](#outputs) &mdash; *which [addresses](#addresses) to send the bitcoins to*
 - transactions are created by bitcoin [clients](#clients)
 - [clients](#clients) relay transactions to eachother and to [miners](#miners)
+
+Mechanism:
+- The input amounts are added up
+- The total output amount cannot exceed the total input amount
+- If the total output is less than the input, the [miner](#miner) will receive the remainder as a [fee](#fee)
+
+<a id="inputs">Transaction Inputs</a>
+---
+A [transaction](#transactions) contains one or more **inputs** that describe which bitcoins to spend. An input is a reference to the [output](#outputs) of a previous transaction. This way, every bitcoin spent is accounted for and can be traced back to its origin.
+
+Function:
+- Allow every amount of bitcoin to be traced back to its generation
+- Make every transaction independently verifiable
+
+Mechanism:
+- An input consists of:
+  - A [transaction id](#txid) &mdash; refers from which transaction the coins came
+  - An [index](#index) &mdash; specifies a single output within that transaction
+- An input always spents *all* bitcoin from the previous output
+- To only use part of the input, [return addresses](#return-address) are used
+
+<a id="outputs">Transaction Outputs</a>
+---
+**transaction outputs** are part of a [transaction](#transactions) and describe where bitcoins should be sent, and how many. The amounts can be tiny fractions of bitcoins.
+
+Features:
+- It consists of:
+  - a single [bitcoin-address](#addresses)
+  - an amount of bitcoin &mdash; *expressed in [satoshis](#satoshi) (one hundred-millionth of a bitcoin)*
+- Mininum output amount is 1 [satoshi](#satoshi)
+
+<a id="satoshi">Satoshi</a>
+---
+One hundred-millionth of a bitcoin (`1/100,000,000` or `0.00000001`). The smallest unit of Bitcoin.
+
+<a id="fee">Fees</a>
+---
+The sender of bitcoins may include a **miner fee** in their transaction. Miners are free to choose which transactions to include in their blocks, and fees encourage them to include a transaction. Because including a transaction doesn't cost anything, fees can be very low. However, the [blocksize](#block-size) limits the number of transactions that can be included in a block, so large transactions (in terms of Kilobytes) usually require a bigger fee.
+
+
+Function:
+- Encourage miners to include a transaction in a block
+- Limit transaction spamming
+- Create a market for processing transactions
+
+Mechanism:
+- If the [input](#inputs)-total of a [transaction](#transactions) exceeds the [output](#outputs)-total, the remainder is rewarded to the miner.
 
 <a id="confirmations">Confirmations</a>
 ---
@@ -224,3 +289,12 @@ Example data and their hashes:
 `This is a piece of text!` &mdash; `34f79yw587w94r7q0243ry057yrw935fw5hk`  
 `This is a piece of text.` &mdash; `fodjxc98syfxeos4ifs3847rt9q34arfleuh`
 
+<a id="index">Index</a>
+---
+In computer science, an **index** is a number that identifies an item in an ordered list. In computer system, items are counted from `0` instead of from `1`.
+
+In this example, index `0` refers to `Bread`, and `2` refers to `Eggs`.
+- Bread
+- Butter
+- Eggs
+- Cheese
