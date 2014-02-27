@@ -6,31 +6,37 @@ Author: *Bouke Versteegh*
 ---
 
 
-**Bitcoin**:
-  - [Bitcoin](#bitcoin)
-  - [Blockchain](#blockchain)
+**Bitcoin Protocol**:
+- [Bitcoin](#bitcoin)
+- [Blockchain](#blockchain)
   - [Blocks](#blocks)
-  - [Transactions](#transactions)
+- [Transactions](#transactions)
+  - [Inputs](#inputs)
+  - [Outputs](#outputs)
+  - Scrypt
+  - Return addresses
+- [Mining](#mining)
   - [Confirmations](#confirmations)
   - [Proof of Work](#proof-of-work)
-  - [Mining](#mining)
-  - [Miner](#miner)
-  - [Addresses](#addresses)
-  - [Vanity address](#vanity-address)
+  - Block reward
   - [Difficulty](#difficulty)
+- [Addresses](#addresses)
   - [Base58Check](#base58check)
-  - Wallets / Clients
-  - Return addresses
-  - Scrypt
+  - [Vanity address](#vanity-address)
+  - [Multisignature addresses](#multisig-addresses)
 
+**Using Bitcoin**:
+- Exchanges
+- Wallets / Clients
+- Cold storage
+- [QR-code](#qr-code)
 
 **Computer Terms**:
-  - [Nonce](#nonce)
-  - [Hash](#hash)
-  - [Public-Key Cryptography](#public-key-cryptography)
-    - [Public Key](#public-key)
-    - [Private Key](#private-key)
-  - [QR-code](#qr-code)
+- [Nonce](#nonce)
+- [Hash](#hash)
+- [Public-Key Cryptography](#public-key-cryptography)
+- [Public Key](#public-key)
+- [Private Key](#private-key)
 
 
 <a id="bitcoin">Bitcoin</a>
