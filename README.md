@@ -19,6 +19,9 @@ Author: *Bouke Versteegh*
   - [Vanity address](#vanity-address)
   - [Difficulty](#difficulty)
   - [Base58Check](#base58check)
+  - Wallets / Clients
+  - Return addresses
+  - Scrypt
 
 
 **Computer Terms**:
