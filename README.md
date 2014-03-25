@@ -13,10 +13,11 @@ Author: *Bouke Versteegh*
 - [Transactions](#transactions)
   - [Inputs](#inputs)
   - [Outputs](#outputs)
-  - [Scrypt] (#scrypt)
+  - [Script] (#script)
   - [Return addresses] (#return-address)
   - [Satoshi](#satoshi)
   - [Fees](#fee)
+  - [Pay-to-hash] (#paytohash)
 - [Mining](#mining)
   - [Confirmations](#confirmations)
   - [Proof of Work](#proof-of-work)
@@ -63,8 +64,7 @@ Author: *Bouke Versteegh*
 Bitcoin is a digital decentralized currency based on cryptography and mathematics.
 
 Function:
-- Allow people to hold and transfer value without a trusted third party
-- Offer a better alternative to Fiat currency more suitable for this digital age.
+- A global currency and digital payment system which cannot be manipulated or cheated and is not controlled by anyone
 
 Features:
   - electronic &mdash; use it online, you can back it up, on your phone
@@ -151,7 +151,7 @@ Mechanism:
 
 <a id="inputs">Transaction Inputs</a>
 ---
-A [transaction](#transactions) contains one or more **inputs** that describe which bitcoins to spend. An input is a reference to the [output](#outputs) of a previous transaction. This way, every bitcoin spent is accounted for and can be traced back to its origin.
+A [transaction](#transactions) contains one or more **inputs** that describe which bitcoins to spend. An input is a reference to the [output](#outputs) of a previous transaction. This way, every spent bitcoin is accounted for and can be traced back to its origin.
 
 Function:
 - Allow every amount of bitcoin to be traced back to its generation
@@ -166,13 +166,23 @@ Mechanism:
 
 <a id="outputs">Transaction Outputs</a>
 ---
-**transaction outputs** are part of a [transaction](#transactions) and describe where bitcoins should be sent, and how many. The amounts can be tiny fractions of bitcoins.
+**transaction outputs** are part of a [transaction](#transactions) and describe to whom bitcoins will be transfered, and how many. The amounts can be tiny fractions of bitcoins.
+
+Function:
+- Specify who can spend a certain amount of bitcoin.
 
 Features:
 - It consists of:
-  - a single [bitcoin-address](#addresses)
-  - an amount of bitcoin &mdash; *expressed in [satoshis](#satoshi) (one hundred-millionth of a bitcoin)*
+  - an amount of bitcoin &mdash; expressed in [satoshis](#satoshi)
+  - an output [script](#script) or a [script hash](#paytohash)
 - Mininum output amount is 1 [satoshi](#satoshi)
+- The transaction "destination" is not necessarily a bitcoin address. Arbitrary spending rules can be created, such as "anyone can spend" or "he who provides a number that hashes to f489w34fwo5fh can spend".
+ 
+Mechanism:
+- The script programmatically defines the rules of who can spend the bitcoins from this output.
+  - The script typically requires that the spender proves ownership of an address (the recipient's bitcoin address).
+- Instead of a script, the [hash of a script](#paytohash) can be used to specify spending rules. In this case, the recipient has to provide the script when they spend this output.
+
 
 <a id="satoshi">Satoshi</a>
 ---
